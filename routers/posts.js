@@ -13,7 +13,6 @@ const router = express.Router();
 router.get("/", index);
 // SHOW
 router.get("/:id", show);
-
 // CREATE
 router.post("/", create);
 // UPDATE

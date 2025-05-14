@@ -1,7 +1,16 @@
 import { posts } from "../data/db.js";
 
 function index(req, res) {
-  res.json(posts);
+  const recipeFilter = req.query.recipe;
+  //   res.json(posts);
+  let filteredPost = posts;
+
+  if (recipeFilter) {
+    filteredPost = posts.filter(function (currentPost) {
+      return currentPost.tags.includes(recipeFilter);
+    });
+  }
+  res.json(filteredPost);
 }
 
 function show(req, res) {
