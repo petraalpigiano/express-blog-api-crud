@@ -1,48 +1,26 @@
 import express from "express";
-import { posts } from "../data/db.js";
+import {
+  index,
+  show,
+  create,
+  update,
+  modify,
+  destroy,
+} from "../controllers/postController.js";
 const router = express.Router();
 
 // INDEX
-router.get("/", (req, res) => {
-  //   res.send("Mostro tutti i post");
-  res.json(posts);
-});
+router.get("/", index);
 // SHOW
-router.get("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  //   res.send(`Ecco il post numero: ${id}`);
-  res.json(
-    posts.find(function (currentPost) {
-      const currentId = currentPost.id;
-      return currentId === id;
-    })
-  );
-});
+router.get("/:id", show);
 
 // CREATE
-router.post("/", (req, res) => {
-  res.send("Ho creato un nuovo post");
-});
+router.post("/", create);
 // UPDATE
-router.put("/:id", (req, res) => {
-  const id = req.params.id;
-  res.send(`Ho modificato interamente il post numero: ${id}`);
-});
+router.put("/:id", update);
 // MODIFY
-router.patch("/:id", (req, res) => {
-  const id = req.params.id;
-  res.send(`Ho modificato parzialmente il post numero: ${id}`);
-});
+router.patch("/:id", modify);
 // DELETE
-router.delete("/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  //   res.send(`Ho eliminato il post numero: ${id}`);
-  res.json(
-    posts.filter(function (currentPost) {
-      const currentId = currentPost.id;
-      return currentId !== id;
-    })
-  );
-});
+router.delete("/:id", destroy);
 
 export default router;
