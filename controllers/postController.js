@@ -48,12 +48,26 @@ function destroy(req, res) {
   const id = parseInt(req.params.id);
   //   res.send(`Ho eliminato il post numero: ${id}`);
   // RISPONDO CON LA LISTA DEI POST SENZA IL POSTO ELIMINATO
-  res.json(
-    posts.filter(function (currentPost) {
-      const currentId = currentPost.id;
-      return currentId !== id;
-    })
-  );
+  //   res.json(
+  //     posts.filter(function (currentPost) {
+  //       const currentId = currentPost.id;
+  //       return currentId !== id;
+  //     })
+  //   );
+  // RISPONDE CON LA LISTA DEI POST MA USANDO SPLICE
+  let postDeleted = [...posts]; // con questo elimina dalla deep copy e non dall'originale, ma nella realta modifichiamo l'originale
+  const postId = posts.find((currentPost) => {
+    const currentId = currentPost.id;
+    return currentId === id;
+  });
+
+  if (!postId) {
+    return res.status(404).json({
+      message: "Post non trovato",
+    });
+  }
+  postDeleted.splice(posts.indexOf(postId), 1);
+  res.json(postDeleted);
   // STAMPO NEL TERMINALE LA LISTA AGGIORNATA
   //   console.log(
   //     posts.filter(function (currentPost) {
