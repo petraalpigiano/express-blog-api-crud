@@ -32,12 +32,22 @@ function modify(req, res) {
 function destroy(req, res) {
   const id = parseInt(req.params.id);
   //   res.send(`Ho eliminato il post numero: ${id}`);
-  res.json(
+  //   RISPONDO CON LA LISTA DEI POST SENZA IL POSTO ELIMINATO
+  //   res.json(
+  //     posts.filter(function (currentPost) {
+  //       const currentId = currentPost.id;
+  //       return currentId !== id;
+  //     })
+  //   );
+  // STAMPO NEL TERMINALE LA LISTA AGGIORNATA
+  console.log(
     posts.filter(function (currentPost) {
       const currentId = currentPost.id;
       return currentId !== id;
     })
   );
+  //   RISPONDO CON STATO 204
+  res.sendStatus(204);
 }
 
 export { index, show, create, update, modify, destroy };
