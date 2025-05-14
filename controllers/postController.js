@@ -16,12 +16,18 @@ function index(req, res) {
 function show(req, res) {
   const id = parseInt(req.params.id);
   //   res.send(`Ecco il post numero: ${id}`);
-  res.json(
-    posts.find(function (currentPost) {
-      const currentId = currentPost.id;
-      return currentId === id;
-    })
-  );
+  const postId = posts.find((currentPost) => {
+    const currentId = currentPost.id;
+    return currentId === id;
+  });
+
+  if (!postId) {
+    return res.status(404).json({
+      message: "Post non trovato",
+    });
+  }
+
+  res.json(postId);
 }
 
 function create(req, res) {
@@ -41,22 +47,22 @@ function modify(req, res) {
 function destroy(req, res) {
   const id = parseInt(req.params.id);
   //   res.send(`Ho eliminato il post numero: ${id}`);
-  //   RISPONDO CON LA LISTA DEI POST SENZA IL POSTO ELIMINATO
-  //   res.json(
-  //     posts.filter(function (currentPost) {
-  //       const currentId = currentPost.id;
-  //       return currentId !== id;
-  //     })
-  //   );
-  // STAMPO NEL TERMINALE LA LISTA AGGIORNATA
-  console.log(
+  // RISPONDO CON LA LISTA DEI POST SENZA IL POSTO ELIMINATO
+  res.json(
     posts.filter(function (currentPost) {
       const currentId = currentPost.id;
       return currentId !== id;
     })
   );
-  //   RISPONDO CON STATO 204
-  res.sendStatus(204);
+  // STAMPO NEL TERMINALE LA LISTA AGGIORNATA
+  //   console.log(
+  //     posts.filter(function (currentPost) {
+  //       const currentId = currentPost.id;
+  //       return currentId !== id;
+  //     })
+  //   );
+  //   //   RISPONDO CON STATO 204
+  //   res.sendStatus(204);
 }
 
 export { index, show, create, update, modify, destroy };
