@@ -50,8 +50,23 @@ function create(req, res) {
 }
 
 function update(req, res) {
-  const id = req.params.id;
-  res.send(`Ho modificato interamente il post numero: ${id}`);
+  const id = parseInt(req.params.id);
+  const { title, content, image, tags } = req.body;
+  // res.send(`Ho modificato interamente il post numero: ${id}`);
+  const postId = posts.find((currentPost) => {
+    const currentId = currentPost.id;
+    return currentId === id;
+  });
+
+  if (!postId) {
+    return res.status(404).json({
+      message: "Post non trovato",
+    });
+  }
+  const updatedPost = { id, title, content, image, tags };
+
+  posts.splice(posts.indexOf(postId), 1, updatedPost);
+  res.json(posts);
 }
 
 function modify(req, res) {
