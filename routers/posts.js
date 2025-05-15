@@ -7,8 +7,11 @@ import {
   modify,
   destroy,
 } from "../controllers/postController.js";
+
+// ROUTER
 const router = express.Router();
 
+// VARIE ROUTE
 // INDEX
 router.get("/", index);
 // SHOW

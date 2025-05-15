@@ -1,19 +1,19 @@
 import express from "express";
-import { posts, port } from "./data/db.js";
+import { port } from "./data/db.js";
 import postsRouter from "./routers/posts.js";
 
+// .EXPRESS
 const app = express();
-// ASSET STATICI
-app.use(express.static("public"));
 
+// MIDDLEWARE PER ASSET STATICI
+app.use(express.static("public"));
+// MIDDLEWARE PER JSON
 app.use(express.json());
 
+// SERVER STA ASCOLTANDO
 app.listen(port, () => {
   console.log(`Il server è in ascolto alla porta: ${port}`);
 });
-// ROUTER
-app.use("/posts", postsRouter);
 
-// app.get("/", (req, res) => {
-//   res.send(posts);
-// });
+// POST ROUTER
+app.use("/posts", postsRouter);

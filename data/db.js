@@ -1,4 +1,7 @@
+// PORTA
 const port = 3000;
+
+// DATABASE DI POST
 const posts = [
   {
     id: 1,
