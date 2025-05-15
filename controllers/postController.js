@@ -32,9 +32,21 @@ function show(req, res) {
 
 function create(req, res) {
   // res.send("Ho creato un nuovo post");
-  const newPost = req.body;
-  res.json(newPost);
-  console.log(newPost);
+  let newId = 0;
+  for (let i = 0; i < posts.length; i++) {
+    newId += 1;
+  }
+
+  const newPost = {
+    id: newId + 1,
+    title: req.body.title,
+    content: req.body.content,
+    image: req.body.image,
+    tags: req.body.tags,
+  };
+  posts.push(newPost);
+
+  res.status(201).json(posts);
 }
 
 function update(req, res) {
