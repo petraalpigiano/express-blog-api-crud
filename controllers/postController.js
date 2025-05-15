@@ -25,7 +25,7 @@ function show(req, res) {
     const currentId = currentPost.id;
     return currentId === id;
   });
-  // ex SE NON TROVO IL POST
+  // ! SE NON TROVO IL POST
   if (!postFound) {
     return res.status(404).json({
       message: "Post non trovato",
@@ -67,10 +67,26 @@ function update(req, res) {
     const currentId = currentPost.id;
     return currentId === id;
   });
-  // ex SE NON TROVO IL POST
+  // ! SE NON TROVO IL POST
   if (!postFound) {
     return res.status(404).json({
       message: "Post non trovato",
+    });
+  }
+  // ! CONTROLLO SUI DATI DELLA RICHIESTA
+  if (typeof title !== "string" || title.length < 3) {
+    return res.status(400).json({
+      message: "Titolo non corretto",
+    });
+  }
+  if (typeof content !== "string" || content.length < 3) {
+    return res.status(400).json({
+      message: "Contenuto non corretto",
+    });
+  }
+  if (!Array.isArray(tags)) {
+    return res.status(400).json({
+      message: "Deve essere un array",
     });
   }
   // ex MODIFICO COMPLETAMENTE I DATI DEL VECCHIO POST ECCETTO L'ID
@@ -92,7 +108,7 @@ function modify(req, res) {
     const currentId = currentPost.id;
     return currentId === id;
   });
-  // ex SE NON TROVO IL POST
+  // ! SE NON TROVO IL POST
   if (!postFound) {
     return res.status(404).json({
       message: "Post non trovato",
@@ -133,7 +149,7 @@ function destroy(req, res) {
     const currentId = currentPost.id;
     return currentId === id;
   });
-  // ex SE NON TROVO IL POST
+  // ! SE NON TROVO IL POST
   if (!postFound) {
     return res.status(404).json({
       message: "Post non trovato",
