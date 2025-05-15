@@ -6,6 +6,8 @@ const app = express();
 // ASSET STATICI
 app.use(express.static("public"));
 
+app.use(express.json());
+
 app.listen(port, () => {
   console.log(`Il server è in ascolto alla porta: ${port}`);
 });

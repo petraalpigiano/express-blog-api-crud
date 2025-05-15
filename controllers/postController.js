@@ -31,7 +31,10 @@ function show(req, res) {
 }
 
 function create(req, res) {
-  res.send("Ho creato un nuovo post");
+  // res.send("Ho creato un nuovo post");
+  const newPost = req.body;
+  res.json(newPost);
+  console.log(newPost);
 }
 
 function update(req, res) {
@@ -49,12 +52,12 @@ function destroy(req, res) {
   //   res.send(`Ho eliminato il post numero: ${id}`);
   // RISPONDO CON LA LISTA DEI POST SENZA IL POSTO ELIMINATO
   //   res.json(
-  //     posts.filter(function (currentPost) {
+  //     posts.filter(function (currentPost) { // con filter fa piu sforzo computazionale che con splice
   //       const currentId = currentPost.id;
   //       return currentId !== id;
   //     })
   //   );
-  // RISPONDE CON LA LISTA DEI POST MA USANDO SPLICE
+  // RISPONDO CON LA LISTA DEI POST MA USANDO SPLICE
   let postDeleted = [...posts]; // con questo elimina dalla deep copy e non dall'originale, ma nella realta modifichiamo l'originale
   const postId = posts.find((currentPost) => {
     const currentId = currentPost.id;
