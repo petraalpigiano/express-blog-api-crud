@@ -2,6 +2,7 @@ import express from "express";
 import { port } from "./data/db.js";
 import postsRouter from "./routers/posts.js";
 import errorHandler from "./middlewares/errorHandler.js";
+import notFoundHandler from "./middlewares/notFoundHandler.js";
 
 // .EXPRESS
 const app = express();
@@ -22,4 +23,4 @@ app.use("/posts", postsRouter);
 // MIDDLEWARE PER LA GESTIONE DEGLI ERRORI DEL SERVER
 app.use(errorHandler);
 // MIDDLEWARE PER LA GESTIONE DELLE ROTTE NON REGISTRATE
-// app.use();
+app.use(notFoundHandler);
