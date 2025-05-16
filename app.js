@@ -17,3 +17,8 @@ app.listen(port, () => {
 
 // POST ROUTER
 app.use("/posts", postsRouter);
+
+// MIDDLEWARE PER LA GESTIONE DEGLI ERRORI
+app.use();
+// MIDDLEWARE PER LA GESTIONE DELLE ROTTE NON REGISTRATE
+app.use();
