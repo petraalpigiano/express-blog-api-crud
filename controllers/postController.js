@@ -2,6 +2,7 @@ import { posts } from "../data/db.js";
 
 // INDEX
 function index(req, res) {
+  // console.log(hola);
   // ex FILTRO L'INTERA LISTA CON 1 FILTRO
   const filterRecipe = req.query.recipe;
   //   res.json(posts);
