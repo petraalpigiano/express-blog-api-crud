@@ -115,19 +115,33 @@ function modify(req, res) {
       message: "Post non trovato",
     });
   }
-  // ex VERIFICO SE IL DATO ESISTE E IN CASO RIASSEGNO IL VALORE
-  if (title) {
-    postFound.title = req.body.title;
-  }
-  if (content) {
-    postFound.content = req.body.content;
-  }
-  if (image) {
-    postFound.image = req.body.image;
-  }
-  if (tags) {
-    postFound.tags = req.body.tags;
-  }
+  // ex VERIFICO SE IL DATO ESISTE E IN CASO RIASSEGNO IL VALORE DUE MODI:
+
+  // ex CON NULLISH COALESCING OPERATOR
+  const newTitle = req.body.title ?? postFound.title;
+  postFound.title = newTitle;
+
+  const newContent = req.body.content ?? postFound.content;
+  postFound.content = newContent;
+
+  const newImage = req.body.image ?? postFound.image;
+  postFound.image = newImage;
+
+  const newTags = req.body.tags ?? postFound.tags;
+  postFound.tags = newTags;
+  // ex CON IF
+  // if (title) {
+  //   postFound.title = req.body.title;
+  // }
+  // if (content) {
+  //   postFound.content = req.body.content;
+  // }
+  // if (image) {
+  //   postFound.image = req.body.image;
+  // }
+  // if (tags) {
+  //   postFound.tags = req.body.tags;
+  // }
   // ex RISPONDO CON LA LISTA DEI POST
   res.json(posts);
 }
